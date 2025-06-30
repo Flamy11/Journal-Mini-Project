@@ -91,10 +91,10 @@ const Trades = () => {
             Manage and analyze your trading history
           </p>
         </div>
-        <Button>
+        {/* <Button>
           <Plus className="h-4 w-4 mr-2" />
           Add Trade
-        </Button>
+        </Button> */}
       </div>
 
       {/* Filters */}

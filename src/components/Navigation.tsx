@@ -19,8 +19,9 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <BarChart3 className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-gray-900">TraderVue</span>
+              {/* <BarChart3 className="h-8 w-8 text-primary" /> */}
+              <img className="h-15 w-20 text-primary" src="/Logo-1.png" alt="" />
+              <span className="text-xl font-bold text-gray-900">LogMyTrades</span>
             </Link>
           </div>
 
@@ -80,10 +81,10 @@ const Navigation = () => {
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
-            <Button size="sm" className="hidden sm:flex">
+            {/* <Button size="sm" className="hidden sm:flex">
               <PlusCircle className="h-4 w-4 mr-2" />
               Add Trade
-            </Button>
+            </Button> */}
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
