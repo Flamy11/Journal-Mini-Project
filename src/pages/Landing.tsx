@@ -1,13 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { BarChart3, TrendingUp, PieChart, Target, Users, Shield, ArrowRight, Star, Quote, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useEmblaCarousel from 'embla-carousel-react';
 
 const Landing = () => {
   const [contactForm, setContactForm] = useState({
@@ -25,7 +26,7 @@ const Landing = () => {
     },
     {
       icon: TrendingUp,
-      title: "Performance Tracking",
+      title: "Performance Tracking", 
       description: "Track your trading performance over time with detailed charts and statistics."
     },
     {
@@ -60,7 +61,7 @@ const Landing = () => {
     },
     {
       name: "Michael Chen",
-      role: "Swing Trader",
+      role: "Swing Trader", 
       content: "The analytics are incredibly detailed and the interface is so intuitive. I've improved my win rate by 15% since using this platform.",
       rating: 5,
       avatar: "MC"
@@ -94,6 +95,25 @@ const Landing = () => {
       avatar: "JW"
     }
   ];
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'start',
+    skipSnaps: false,
+    dragFree: true
+  });
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const autoScroll = () => {
+      emblaApi.scrollNext();
+    };
+
+    const intervalId = setInterval(autoScroll, 3000); // Auto-scroll every 3 seconds
+
+    return () => clearInterval(intervalId);
+  }, [emblaApi]);
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -327,7 +347,7 @@ const Landing = () => {
       </section>
 
       {/* User Reviews Section */}
-      <section id="reviews" className="py-20 bg-white">
+      <section id="reviews" className="py-20 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -338,29 +358,33 @@ const Landing = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold mr-4">
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                      <div className="text-sm text-gray-600">{testimonial.role}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center mb-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <Quote className="h-6 w-6 text-primary/20 mb-2" />
-                  <p className="text-gray-700 italic">"{testimonial.content}"</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <div key={index} className="flex-[0_0_350px] min-w-0 pl-6">
+                  <Card className="relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold mr-4">
+                          {testimonial.avatar}
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                          <div className="text-sm text-gray-600">{testimonial.role}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center mb-3">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                      <Quote className="h-6 w-6 text-primary/20 mb-2" />
+                      <p className="text-gray-700 italic">"{testimonial.content}"</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
