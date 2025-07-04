@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -19,7 +18,6 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              {/* <BarChart3 className="h-8 w-8 text-primary" /> */}
               <img className="h-15 w-20 text-primary" src="/Logo-1.png" alt="" />
               <span className="text-xl font-bold text-gray-900">LogMyTrades</span>
             </Link>
@@ -81,11 +79,6 @@ const Navigation = () => {
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
-            {/* <Button size="sm" className="hidden sm:flex">
-              <PlusCircle className="h-4 w-4 mr-2" />
-              Add Trade
-            </Button> */}
-
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center space-x-2">
@@ -106,9 +99,11 @@ const Navigation = () => {
                   <span>Settings</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
+                <DropdownMenuItem asChild>
+                  <Link to="/login" className="flex items-center">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
