@@ -9,42 +9,40 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [marketingEmails, setMarketingEmails] = useState(false);
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [subscribeNewsletter, setSubscribeNewsletter] = useState(false);
   const navigate = useNavigate();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
     
-    if (!acceptTerms) {
-      alert("Please accept the terms and conditions");
+    if (!agreeToTerms) {
+      alert("Please agree to the terms and conditions");
       return;
     }
 
     // Here you would typically handle user registration
-    console.log("Signup attempted with:", { ...formData, acceptTerms, marketingEmails });
+    console.log("Signup attempted with:", { 
+      firstName, 
+      lastName, 
+      email, 
+      password, 
+      agreeToTerms, 
+      subscribeNewsletter 
+    });
+    
     // For demo purposes, redirect to dashboard
     navigate("/");
   };
@@ -64,7 +62,7 @@ const Signup = () => {
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Create your account</CardTitle>
             <CardDescription>
-              Start tracking your trades for free
+              Join thousands of traders already using LogMyTrades
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -76,11 +74,10 @@ const Signup = () => {
                     id="firstName"
                     name="firstName"
                     type="text"
-                    autoComplete="given-name"
                     required
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    placeholder="First name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="John"
                     className="mt-1"
                   />
                 </div>
@@ -90,11 +87,10 @@ const Signup = () => {
                     id="lastName"
                     name="lastName"
                     type="text"
-                    autoComplete="family-name"
                     required
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    placeholder="Last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Doe"
                     className="mt-1"
                   />
                 </div>
@@ -108,9 +104,9 @@ const Signup = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="john@example.com"
                   className="mt-1"
                 />
               </div>
@@ -124,9 +120,9 @@ const Signup = () => {
                     type={showPassword ? "text" : "password"}
                     autoComplete="new-password"
                     required
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    placeholder="Create a password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Create a strong password"
                     className="pr-10"
                   />
                   <button
@@ -152,8 +148,8 @@ const Signup = () => {
                     type={showConfirmPassword ? "text" : "password"}
                     autoComplete="new-password"
                     required
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm your password"
                     className="pr-10"
                   />
@@ -174,32 +170,31 @@ const Signup = () => {
               <div className="space-y-4">
                 <div className="flex items-start space-x-2">
                   <Checkbox
-                    id="accept-terms"
-                    checked={acceptTerms}
-                    onCheckedChange={setAcceptTerms}
+                    id="agree-terms"
+                    checked={agreeToTerms}
+                    onCheckedChange={(checked) => setAgreeToTerms(checked === true)}
                     className="mt-1"
                   />
-                  <Label htmlFor="accept-terms" className="text-sm leading-relaxed">
+                  <Label htmlFor="agree-terms" className="text-sm leading-relaxed">
                     I agree to the{" "}
-                    <Link to="/terms" className="text-primary hover:text-primary/80 transition-colors">
+                    <Link to="#" className="text-primary hover:text-primary/80 transition-colors">
                       Terms of Service
                     </Link>{" "}
                     and{" "}
-                    <Link to="/privacy" className="text-primary hover:text-primary/80 transition-colors">
+                    <Link to="#" className="text-primary hover:text-primary/80 transition-colors">
                       Privacy Policy
                     </Link>
                   </Label>
                 </div>
 
-                <div className="flex items-start space-x-2">
+                <div className="flex items-center space-x-2">
                   <Checkbox
-                    id="marketing-emails"
-                    checked={marketingEmails}
-                    onCheckedChange={setMarketingEmails}
-                    className="mt-1"
+                    id="newsletter"
+                    checked={subscribeNewsletter}
+                    onCheckedChange={(checked) => setSubscribeNewsletter(checked === true)}
                   />
-                  <Label htmlFor="marketing-emails" className="text-sm leading-relaxed">
-                    I'd like to receive marketing emails about LogMyTrades features and updates
+                  <Label htmlFor="newsletter" className="text-sm">
+                    Send me trading tips and market updates
                   </Label>
                 </div>
               </div>
