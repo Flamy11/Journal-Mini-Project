@@ -93,7 +93,7 @@ const Login = () => {
                   <Checkbox
                     id="remember-me"
                     checked={rememberMe}
-                    onCheckedChange={checked => setRememberMe(checked === true)}
+                    onCheckedChange={(checked) => setRememberMe(checked === true)}
                   />
                   <Label htmlFor="remember-me" className="text-sm">
                     Remember me
