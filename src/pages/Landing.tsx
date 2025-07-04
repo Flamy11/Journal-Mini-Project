@@ -96,6 +96,9 @@ const Landing = () => {
     }
   ];
 
+  const firstRowTestimonials = testimonials.slice(0, 3);
+  const secondRowTestimonials = testimonials.slice(3, 6);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
     align: 'start',
@@ -358,32 +361,65 @@ const Landing = () => {
             </p>
           </div>
           
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {[...testimonials, ...testimonials].map((testimonial, index) => (
-                <div key={index} className="flex-[0_0_350px] min-w-0 pl-6">
-                  <Card className="relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
-                    <CardContent className="p-6">
-                      <div className="flex items-center mb-4">
-                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold mr-4">
-                          {testimonial.avatar}
+          <div className="space-y-8">
+            {/* First Row - Scrolling Left to Right */}
+            <div className="overflow-hidden">
+              <div className="flex animate-[scroll-left_30s_linear_infinite] hover:[animation-play-state:paused]">
+                {[...firstRowTestimonials, ...firstRowTestimonials, ...firstRowTestimonials].map((testimonial, index) => (
+                  <div key={index} className="flex-[0_0_350px] min-w-0 px-3">
+                    <Card className="relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+                      <CardContent className="p-6">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold mr-4">
+                            {testimonial.avatar}
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                            <div className="text-sm text-gray-600">{testimonial.role}</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                          <div className="text-sm text-gray-600">{testimonial.role}</div>
+                        <div className="flex items-center mb-3">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
                         </div>
-                      </div>
-                      <div className="flex items-center mb-3">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-                      <Quote className="h-6 w-6 text-primary/20 mb-2" />
-                      <p className="text-gray-700 italic">"{testimonial.content}"</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
+                        <Quote className="h-6 w-6 text-primary/20 mb-2" />
+                        <p className="text-gray-700 italic">"{testimonial.content}"</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Second Row - Scrolling Right to Left */}
+            <div className="overflow-hidden">
+              <div className="flex animate-[scroll-right_30s_linear_infinite] hover:[animation-play-state:paused]">
+                {[...secondRowTestimonials, ...secondRowTestimonials, ...secondRowTestimonials].map((testimonial, index) => (
+                  <div key={index} className="flex-[0_0_350px] min-w-0 px-3">
+                    <Card className="relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+                      <CardContent className="p-6">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold mr-4">
+                            {testimonial.avatar}
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                            <div className="text-sm text-gray-600">{testimonial.role}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center mb-3">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
+                        </div>
+                        <Quote className="h-6 w-6 text-primary/20 mb-2" />
+                        <p className="text-gray-700 italic">"{testimonial.content}"</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -525,6 +561,26 @@ const Landing = () => {
           </div>
         </div>
       </footer>
+
+      <style jsx>{`
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+        
+        @keyframes scroll-right {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+      `}</style>
     </div>
   );
 };
