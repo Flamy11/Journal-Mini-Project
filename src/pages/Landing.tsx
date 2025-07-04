@@ -1,10 +1,22 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart3, TrendingUp, PieChart, Target, Users, Shield, ArrowRight, Check } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { BarChart3, TrendingUp, PieChart, Target, Users, Shield, ArrowRight, Star, Quote, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Landing = () => {
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
   const features = [
     {
       icon: BarChart3,
@@ -38,44 +50,57 @@ const Landing = () => {
     }
   ];
 
-  const pricingPlans = [
+  const testimonials = [
     {
-      name: "Basic",
-      price: "Free",
-      description: "Perfect for beginners",
-      features: [
-        "Up to 100 trades per month",
-        "Basic analytics",
-        "Performance tracking",
-        "Mobile app access"
-      ]
+      name: "Sarah Johnson",
+      role: "Day Trader",
+      content: "LogMyTrades has completely transformed how I analyze my trading performance. The insights I get help me make better decisions every day.",
+      rating: 5,
+      avatar: "SJ"
     },
     {
-      name: "Pro",
-      price: "$29",
-      description: "For serious traders",
-      features: [
-        "Unlimited trades",
-        "Advanced analytics",
-        "Custom reports",
-        "Priority support",
-        "API access"
-      ],
-      popular: true
+      name: "Michael Chen",
+      role: "Swing Trader",
+      content: "The analytics are incredibly detailed and the interface is so intuitive. I've improved my win rate by 15% since using this platform.",
+      rating: 5,
+      avatar: "MC"
     },
     {
-      name: "Enterprise",
-      price: "$99",
-      description: "For trading firms",
-      features: [
-        "Everything in Pro",
-        "Team collaboration",
-        "White-label solution",
-        "Dedicated support",
-        "Custom integrations"
-      ]
+      name: "Emma Rodriguez",
+      role: "Options Trader",
+      content: "Finally, a trading journal that understands what traders actually need. The reporting features are outstanding.",
+      rating: 5,
+      avatar: "ER"
+    },
+    {
+      name: "David Kim",
+      role: "Forex Trader",
+      content: "I've tried many trading journals, but LogMyTrades is by far the most comprehensive. It's become an essential part of my trading routine.",
+      rating: 5,
+      avatar: "DK"
+    },
+    {
+      name: "Lisa Thompson",
+      role: "Crypto Trader",
+      content: "The portfolio tracking and performance analysis have helped me identify my strengths and weaknesses as a trader.",
+      rating: 5,
+      avatar: "LT"
+    },
+    {
+      name: "James Wilson",
+      role: "Institutional Trader",
+      content: "Professional-grade analytics that scale with our trading operation. Excellent platform for serious traders.",
+      rating: 5,
+      avatar: "JW"
     }
   ];
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Contact form submitted:', contactForm);
+    // Here you would handle the form submission
+    setContactForm({ name: '', email: '', subject: '', message: '' });
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -89,8 +114,82 @@ const Landing = () => {
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-gray-700 hover:text-primary transition-colors">Features</a>
-              <a href="#pricing" className="text-gray-700 hover:text-primary transition-colors">Pricing</a>
+              <a href="#reviews" className="text-gray-700 hover:text-primary transition-colors">Reviews</a>
               <a href="#about" className="text-gray-700 hover:text-primary transition-colors">About</a>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="text-gray-700 hover:text-primary transition-colors">Contact</button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[500px]">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold">Contact Us</DialogTitle>
+                    <DialogDescription>
+                      Get in touch with our team. We'd love to hear from you.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <form onSubmit={handleContactSubmit} className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                          id="name"
+                          value={contactForm.name}
+                          onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={contactForm.email}
+                          onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <Label htmlFor="subject">Subject</Label>
+                      <Input
+                        id="subject"
+                        value={contactForm.subject}
+                        onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="message">Message</Label>
+                      <Textarea
+                        id="message"
+                        rows={4}
+                        value={contactForm.message}
+                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="flex flex-col space-y-4 pt-4">
+                      <Button type="submit" className="w-full">
+                        Send Message
+                      </Button>
+                      <div className="text-sm text-gray-600 space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <Mail className="h-4 w-4" />
+                          <span>support@logmytrades.com</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Phone className="h-4 w-4" />
+                          <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <MapPin className="h-4 w-4" />
+                          <span>San Francisco, CA</span>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </DialogContent>
+              </Dialog>
               <Link to="/login" className="text-gray-700 hover:text-primary transition-colors">Login</Link>
               <Link to="/signup">
                 <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
@@ -125,8 +224,78 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Trade Journal Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Your Complete Trading Journal
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Record every trade, analyze your performance, and discover patterns in your trading behavior. 
+                Our advanced journaling system helps you become a more disciplined and profitable trader.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span className="text-gray-700">Detailed trade logging with screenshots</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span className="text-gray-700">Advanced filtering and search capabilities</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span className="text-gray-700">Performance analytics and insights</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span className="text-gray-700">Export data for tax reporting</span>
+                </div>
+              </div>
+              <div className="mt-8">
+                <Link to="/signup">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90">
+                    Start Journaling
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8">
+                <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+                  <div className="bg-gray-800 px-4 py-2 flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div className="p-6">
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center pb-2 border-b">
+                        <span className="font-medium">AAPL</span>
+                        <span className="text-green-600 font-medium">+$342.50</span>
+                      </div>
+                      <div className="flex justify-between items-center pb-2 border-b">
+                        <span className="font-medium">TSLA</span>
+                        <span className="text-red-600 font-medium">-$125.30</span>
+                      </div>
+                      <div className="flex justify-between items-center pb-2 border-b">
+                        <span className="font-medium">NVDA</span>
+                        <span className="text-green-600 font-medium">+$892.15</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
+      <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -157,51 +326,38 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-gray-50">
+      {/* User Reviews Section */}
+      <section id="reviews" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Choose Your Plan
+              What Our Traders Say
             </h2>
             <p className="text-xl text-gray-600">
-              Start free and upgrade as you grow
+              Join thousands of successful traders who trust LogMyTrades
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <Card key={index} className={`relative ${plan.popular ? 'border-primary shadow-lg scale-105' : ''}`}>
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">
-                      Most Popular
-                    </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold mr-4">
+                      {testimonial.avatar}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                      <div className="text-sm text-gray-600">{testimonial.role}</div>
+                    </div>
                   </div>
-                )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <div className="text-4xl font-bold text-primary">
-                    {plan.price}
-                    {plan.price !== "Free" && <span className="text-lg text-gray-600">/month</span>}
-                  </div>
-                  <CardDescription>{plan.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <Check className="h-4 w-4 text-green-500 mr-3" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
+                  <div className="flex items-center mb-3">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
                     ))}
-                  </ul>
-                  <Button 
-                    className={`w-full ${plan.popular ? 'bg-primary hover:bg-primary/90' : ''}`}
-                    variant={plan.popular ? 'default' : 'outline'}
-                  >
-                    Get Started
-                  </Button>
+                  </div>
+                  <Quote className="h-6 w-6 text-primary/20 mb-2" />
+                  <p className="text-gray-700 italic">"{testimonial.content}"</p>
                 </CardContent>
               </Card>
             ))}
@@ -244,7 +400,7 @@ const Landing = () => {
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Reviews</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">API</a></li>
               </ul>
             </div>
@@ -260,7 +416,82 @@ const Landing = () => {
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="hover:text-white transition-colors">Contact</button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[500px]">
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl font-bold">Contact Us</DialogTitle>
+                        <DialogDescription>
+                          Get in touch with our team. We'd love to hear from you.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <form onSubmit={handleContactSubmit} className="space-y-4">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="footer-name">Name</Label>
+                            <Input
+                              id="footer-name"
+                              value={contactForm.name}
+                              onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                              required
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="footer-email">Email</Label>
+                            <Input
+                              id="footer-email"
+                              type="email"
+                              value={contactForm.email}
+                              onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <Label htmlFor="footer-subject">Subject</Label>
+                          <Input
+                            id="footer-subject"
+                            value={contactForm.subject}
+                            onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="footer-message">Message</Label>
+                          <Textarea
+                            id="footer-message"
+                            rows={4}
+                            value={contactForm.message}
+                            onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="flex flex-col space-y-4 pt-4">
+                          <Button type="submit" className="w-full">
+                            Send Message
+                          </Button>
+                          <div className="text-sm text-gray-600 space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Mail className="h-4 w-4" />
+                              <span>support@logmytrades.com</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Phone className="h-4 w-4" />
+                              <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <MapPin className="h-4 w-4" />
+                              <span>San Francisco, CA</span>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </DialogContent>
+                  </Dialog>
+                </li>
                 <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
               </ul>
             </div>
