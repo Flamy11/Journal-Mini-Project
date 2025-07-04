@@ -176,7 +176,7 @@ const Signup = () => {
                   <Checkbox
                     id="accept-terms"
                     checked={acceptTerms}
-                    onCheckedChange={setAcceptTerms}
+                    onCheckedChange={checked => setAcceptTerms(checked === true)}
                     className="mt-1"
                   />
                   <Label htmlFor="accept-terms" className="text-sm leading-relaxed">
@@ -195,7 +195,7 @@ const Signup = () => {
                   <Checkbox
                     id="marketing-emails"
                     checked={marketingEmails}
-                    onCheckedChange={setMarketingEmails}
+                    onCheckedChange={checked => setMarketingEmails(checked === true)}
                     className="mt-1"
                   />
                   <Label htmlFor="marketing-emails" className="text-sm leading-relaxed">
