@@ -9,6 +9,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
+import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Trades from "./pages/Trades";
 import Portfolio from "./pages/Portfolio";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/contact" element={<Contact />} />
           
           {/* Protected routes with navigation */}
           <Route path="/*" element={
