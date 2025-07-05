@@ -20,7 +20,7 @@ const Login = () => {
     // Here you would typically handle authentication
     console.log("Login attempted with:", { email, password, rememberMe });
     // For demo purposes, redirect to dashboard
-    navigate("/");
+    navigate("/landing");
   };
 
   return (

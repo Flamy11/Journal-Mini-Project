@@ -253,30 +253,16 @@ const Landing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Your Complete Trading Journal
+                Trading Journal
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Record every trade, analyze your performance, and discover patterns in your trading behavior. 
-                Our advanced journaling system helps you become a more disciplined and profitable trader.
+                Record past trading habits with our notes
+                management system. Track and review every trade,
+                no matter how old. All entries and exits are displayed
+                on a TradingView chart with drawing and indicator 
+                capabilities. Use our trading diary to document thoughts,
+                observations, and lessons from each trade.
               </p>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">Detailed trade logging with screenshots</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">Advanced filtering and search capabilities</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">Performance analytics and insights</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">Export data for tax reporting</span>
-                </div>
-              </div>
               <div className="mt-8">
                 <Link to="/signup">
                   <Button size="lg" className="bg-primary hover:bg-primary/90">
@@ -287,31 +273,7 @@ const Landing = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8">
-                <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-                  <div className="bg-gray-800 px-4 py-2 flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  </div>
-                  <div className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center pb-2 border-b">
-                        <span className="font-medium">AAPL</span>
-                        <span className="text-green-600 font-medium">+$342.50</span>
-                      </div>
-                      <div className="flex justify-between items-center pb-2 border-b">
-                        <span className="font-medium">TSLA</span>
-                        <span className="text-red-600 font-medium">-$125.30</span>
-                      </div>
-                      <div className="flex justify-between items-center pb-2 border-b">
-                        <span className="font-medium">NVDA</span>
-                        <span className="text-green-600 font-medium">+$892.15</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    <img src="tradejournalImage.jpg" width={"100%"} height={"100%"} alt="" />
             </div>
           </div>
         </div>
@@ -562,25 +524,27 @@ const Landing = () => {
         </div>
       </footer>
 
-      <style jsx>{`
-        @keyframes scroll-left {
-          0% {
-            transform: translateX(-100%);
+      <style>
+        {`
+          @keyframes scroll-left {
+            0% {
+              transform: translateX(-100%);
+            }
+            100% {
+              transform: translateX(0%);
+            }
           }
-          100% {
-            transform: translateX(0%);
+          
+          @keyframes scroll-right {
+            0% {
+              transform: translateX(0%);
+            }
+            100% {
+              transform: translateX(-100%);
+            }
           }
-        }
-        
-        @keyframes scroll-right {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
