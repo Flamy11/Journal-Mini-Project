@@ -1,23 +1,13 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { BarChart3, TrendingUp, PieChart, Target, Users, Shield, ArrowRight, Star, Quote, Mail, Phone, MapPin } from "lucide-react";
+import { BarChart3, TrendingUp, PieChart, Target, Users, Shield, ArrowRight, Star, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from 'embla-carousel-react';
 
 const Landing = () => {
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
   const features = [
     {
       icon: BarChart3,
@@ -118,13 +108,6 @@ const Landing = () => {
     return () => clearInterval(intervalId);
   }, [emblaApi]);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Contact form submitted:', contactForm);
-    // Here you would handle the form submission
-    setContactForm({ name: '', email: '', subject: '', message: '' });
-  };
-
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -139,80 +122,7 @@ const Landing = () => {
               <a href="#features" className="text-gray-700 hover:text-primary transition-colors">Features</a>
               <a href="#reviews" className="text-gray-700 hover:text-primary transition-colors">Reviews</a>
               <a href="#about" className="text-gray-700 hover:text-primary transition-colors">About</a>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <button className="text-gray-700 hover:text-primary transition-colors">Contact</button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[500px]">
-                  <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold">Contact Us</DialogTitle>
-                    <DialogDescription>
-                      Get in touch with our team. We'd love to hear from you.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <form onSubmit={handleContactSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="name">Name</Label>
-                        <Input
-                          id="name"
-                          value={contactForm.name}
-                          onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={contactForm.email}
-                          onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="subject">Subject</Label>
-                      <Input
-                        id="subject"
-                        value={contactForm.subject}
-                        onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="message">Message</Label>
-                      <Textarea
-                        id="message"
-                        rows={4}
-                        value={contactForm.message}
-                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-4 pt-4">
-                      <Button type="submit" className="w-full">
-                        Send Message
-                      </Button>
-                      <div className="text-sm text-gray-600 space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <Mail className="h-4 w-4" />
-                          <span>support@logmytrades.com</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Phone className="h-4 w-4" />
-                          <span>+1 (555) 123-4567</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="h-4 w-4" />
-                          <span>San Francisco, CA</span>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </DialogContent>
-              </Dialog>
+              <Link to="/contact" className="text-gray-700 hover:text-primary transition-colors">Contact</Link>
               <Link to="/login" className="text-gray-700 hover:text-primary transition-colors">Login</Link>
               <Link to="/signup">
                 <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
@@ -477,80 +387,7 @@ const Landing = () => {
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
                 <li>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <button className="hover:text-white transition-colors">Contact</button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[500px]">
-                      <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold">Contact Us</DialogTitle>
-                        <DialogDescription>
-                          Get in touch with our team. We'd love to hear from you.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <form onSubmit={handleContactSubmit} className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="footer-name">Name</Label>
-                            <Input
-                              id="footer-name"
-                              value={contactForm.name}
-                              onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                              required
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor="footer-email">Email</Label>
-                            <Input
-                              id="footer-email"
-                              type="email"
-                              value={contactForm.email}
-                              onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <Label htmlFor="footer-subject">Subject</Label>
-                          <Input
-                            id="footer-subject"
-                            value={contactForm.subject}
-                            onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="footer-message">Message</Label>
-                          <Textarea
-                            id="footer-message"
-                            rows={4}
-                            value={contactForm.message}
-                            onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                            required
-                          />
-                        </div>
-                        <div className="flex flex-col space-y-4 pt-4">
-                          <Button type="submit" className="w-full">
-                            Send Message
-                          </Button>
-                          <div className="text-sm text-gray-600 space-y-2">
-                            <div className="flex items-center space-x-2">
-                              <Mail className="h-4 w-4" />
-                              <span>support@logmytrades.com</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Phone className="h-4 w-4" />
-                              <span>+1 (555) 123-4567</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <MapPin className="h-4 w-4" />
-                              <span>San Francisco, CA</span>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </DialogContent>
-                  </Dialog>
+                  <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
                 </li>
                 <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
               </ul>
@@ -562,7 +399,7 @@ const Landing = () => {
         </div>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         @keyframes scroll-left {
           0% {
             transform: translateX(-100%);
