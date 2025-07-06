@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -17,7 +18,7 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/dashboard" className="flex items-center space-x-2">
               <img className="h-15 w-20 text-primary" src="/Logo-1.png" alt="" />
               <span className="text-xl font-bold text-gray-900">LogMyTrades</span>
             </Link>
@@ -26,9 +27,9 @@ const Navigation = () => {
           {/* Main Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link
-              to="/"
+              to="/dashboard"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/') 
+                isActive('/dashboard') 
                   ? 'text-primary border-b-2 border-primary pb-4' 
                   : 'text-gray-700'
               }`}
@@ -36,9 +37,9 @@ const Navigation = () => {
               Dashboard
             </Link>
             <Link
-              to="/trades"
+              to="/dashboard/trades"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/trades') 
+                isActive('/dashboard/trades') 
                   ? 'text-primary border-b-2 border-primary pb-4' 
                   : 'text-gray-700'
               }`}
@@ -46,9 +47,9 @@ const Navigation = () => {
               Trades
             </Link>
             <Link
-              to="/portfolio"
+              to="/dashboard/portfolio"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/portfolio') 
+                isActive('/dashboard/portfolio') 
                   ? 'text-primary border-b-2 border-primary pb-4' 
                   : 'text-gray-700'
               }`}
@@ -56,9 +57,9 @@ const Navigation = () => {
               Portfolio
             </Link>
             <Link
-              to="/reports"
+              to="/dashboard/reports"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/reports') 
+                isActive('/dashboard/reports') 
                   ? 'text-primary border-b-2 border-primary pb-4' 
                   : 'text-gray-700'
               }`}
@@ -66,9 +67,9 @@ const Navigation = () => {
               Reports
             </Link>
             <Link
-              to="/analytics"
+              to="/dashboard/analytics"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/analytics') 
+                isActive('/dashboard/analytics') 
                   ? 'text-primary border-b-2 border-primary pb-4' 
                   : 'text-gray-700'
               }`}
