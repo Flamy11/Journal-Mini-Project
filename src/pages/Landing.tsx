@@ -1,13 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { BarChart3, TrendingUp, PieChart, Target, Users, Shield, ArrowRight, Star, Quote } from "lucide-react";
+import { BarChart3, TrendingUp, PieChart, Target, Users, Shield, ArrowRight, Star, Quote, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from 'embla-carousel-react';
 
 const Landing = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const features = [
     {
       icon: BarChart3,
@@ -108,6 +109,14 @@ const Landing = () => {
     return () => clearInterval(intervalId);
   }, [emblaApi]);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -118,17 +127,74 @@ const Landing = () => {
               <img className="h-15 w-20" src="/Logo-1.png" alt="LogMyTrades" />
               <span className="text-xl font-bold text-gray-900">LogMyTrades</span>
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-primary transition-colors">Features</a>
-              <a href="#reviews" className="text-gray-700 hover:text-primary transition-colors">Reviews</a>
-              <a href="#about" className="text-gray-700 hover:text-primary transition-colors">About</a>
+              <button onClick={() => scrollToSection('features')} className="text-gray-700 hover:text-primary transition-colors">Features</button>
+              <button onClick={() => scrollToSection('reviews')} className="text-gray-700 hover:text-primary transition-colors">Reviews</button>
+              <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-primary transition-colors">About</button>
               <Link to="/contact" className="text-gray-700 hover:text-primary transition-colors">Contact</Link>
               <Link to="/login" className="text-gray-700 hover:text-primary transition-colors">Login</Link>
               <Link to="/signup">
                 <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
               </Link>
             </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-700 hover:text-primary p-2"
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 bg-white">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <button 
+                  onClick={() => scrollToSection('features')} 
+                  className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors w-full text-left"
+                >
+                  Features
+                </button>
+                <button 
+                  onClick={() => scrollToSection('reviews')} 
+                  className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors w-full text-left"
+                >
+                  Reviews
+                </button>
+                <button 
+                  onClick={() => scrollToSection('about')} 
+                  className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors w-full text-left"
+                >
+                  About
+                </button>
+                <Link 
+                  to="/contact" 
+                  className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact
+                </Link>
+                <Link 
+                  to="/login" 
+                  className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <div className="px-3 py-2">
+                  <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                    <Button className="bg-primary hover:bg-primary/90 w-full">Get Started</Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -335,8 +401,8 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary">
+      {/* About Section */}
+      <section id="about" className="py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
             Ready to Improve Your Trading?
