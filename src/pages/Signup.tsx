@@ -44,7 +44,7 @@ const Signup = () => {
     });
     
     // For demo purposes, redirect to dashboard
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
